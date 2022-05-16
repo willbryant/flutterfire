@@ -198,5 +198,17 @@ void setupTests() {
         }
       },
     );
+
+    test('appInstanceId', () async {
+      if (kIsWeb) {
+        await expectLater(
+          FirebaseAnalytics.instance.appInstanceId,
+          throwsA(isA<UnimplementedError>()),
+        );
+      } else {
+        final result = await FirebaseAnalytics.instance.appInstanceId;
+        expect(result, isA<String>());
+      }
+    });
   });
 }
